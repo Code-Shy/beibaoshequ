@@ -1,0 +1,41 @@
+{% extends 'dashboard.html' %}
+
+{% block main %}
+    <h1>文章列表</h1>
+    <a  href="{% url 'article_add' %}"><i class="fa fa-plus btn-primary btn-sm"></i>新增文章</a>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>id</th>
+            <th>标题</th>
+            <th>分类</th>
+            <th>创建时间</th>
+            <th>更新时间</th>
+            <th>发布状态</th>
+           <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in all_article %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ article.pk }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.category|default:'-' }}</td>
+                <td>{{ article.create_time }}</td>
+                <td>{{ article.update_time }}</td>
+                <td>{{ article.show_publish_status }}   </td>
+                <td>
+                    <a href="{% url 'article_edit' article.pk %}?url={{ request.get_full_path }}"> <i class="fa fa-edit"></i></a>
+                    <a href="{% url 'article_delete' article.pk %}?url={{ request.get_full_path }}"> <i class="fa fa-trash"></i></a>
+                </td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+{% endblock %}

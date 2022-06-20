@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNOW | 文章管理</title>
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    {% load static %}
+    <link href="{% static 'plugins/dashboard/css/footable.core.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/dashboard/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/dashboard/css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span>
+                        <img alt="image" class="img-circle" src="{{ request.my_user.avatar.url }} " style="width: 20px; height:20px"/>
+                        </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                            <strong class="font-bold">{{ request.my_user.username }}</strong>
+                            </span>
+                        </span>
+                        </a>
+
+                    </div>
+                    <div class="logo-element">
+                        KNOW
+                    </div>
+                </li>
+                <li class="active">
+                    <a href="{% url 'article_list' %}">
+                        <i class="fa fa-book"></i>
+                        <span class="nav-label">文章管理</span>
+                    </a>
+
+                    {% comment %}       {% url 'category_list' %}{% endcomment %}
+                    <a href="">
+                        <i class="fa fa-dashboard"></i>
+                        <span class="nav-label">分类管理</span>
+                    </a>
+                </li>
+
+                {% if request.user_obj.position == 'root' %}
+                    <li>
+                        <a href=""><i class="fa fa-dashboard"></i> <span
+                                {% comment %}   {% url 'series_list' %}{% endcomment %}
+                                class="nav-label">系列管理</span></a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
+                    <form role="search" class="navbar-form-custom" action="">
+                        <div class="form-group">
+                            <input type="text" placeholder="搜索" class="form-control"
+                                   name="query" id="top-search">
+                        </div>
+                    </form>
+                </div>
+
+                <ul class="nav navbar-top-links navbar-right">
+                      <li>
+                        <a href="{% url 'index' %}">
+                            <i class="fa fa-window-restore" ></i> 返回首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">
+                            <i class="fa fa-sign-out"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            {% block main %}
+
+                            {% endblock %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="pull-right">
+            </div>
+            <div>
+                <strong>Copyright</strong>
+            </div>
+        </div>
+    </div>
+</div>
+{% block js %}
+
+{% endblock %}
+<script src="{% static 'plugins/dashboard/js/jquery-2.1.1.js' %}"></script>
+<script src="{% static 'plugins/dashboard/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/dashboard/js/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'plugins/dashboard/js/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'plugins/dashboard/js/inspinia.js' %}"></script>
+<script src="{% static 'plugins/dashboard/js/pace.min.js' %}"></script>
+
+<script src="{% static 'plugins/dashboard/js/footable.all.min.js' %}"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+        $('.footable').footable();
+
+    });
+
+</script>
+</body>
+</html>

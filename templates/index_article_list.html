@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block container %}
+<div class="container">
+    <!-- 文章摘要显示区 -->
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+            {% for article in all_article %}
+                <div class="blog">
+                    <h4 class="blog-post-title"><a href="{% url 'article' article.pk %} ">   {{ article.title }}</a></h4>
+                    <p>{{ article.abstract }}</p>
+                    <p class="blog-post-meta">{{ article.create_time }} by {{ article.author }}</p>
+                </div><!-- /.blog-post -->
+                <hr>
+            {% endfor %}
+
+            {{ page_html|safe }}
+        </div><!-- /.blog-main -->
+
+        <!-- 侧边栏 -->
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>公告</h4>
+                <p>尊敬的用户，欢迎您使用该平台，有问题可以反馈给XXX@xx.com</p>
+            </div>
+            <div class="sidebar-module">
+                <h4>热门问题</h4>
+                <ol class="list-unstyled">
+                    <li><a href="http://127.0.0.1:8000/article/1/">背包问题</a></li>
+                    <li><a href="http://127.0.0.1:8000/article/2/">01背包问题</a></li>
+                    <li><a href="http://127.0.0.1:8000/article/3/">背包问题分类</a></li>
+
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4>友情链接</h4>
+                <ol class="list-unstyled">
+                    <li><a href="https://www.zhihu.com/">知乎</a></li>
+                    <li><a href="https://www.csdn.net/">CSDN</a></li>
+                </ol>
+            </div>
+        </div><!-- /.blog-sidebar -->
+    </div><!-- /.row -->
+
+</div><!-- /.container -->
+
+{% endblock %}

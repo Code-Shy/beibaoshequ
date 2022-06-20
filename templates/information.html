@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block container %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">个人信息</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row" >
+
+                    <div class="col-xs-6 col-md-3">
+                        <label>用户头像</label>
+                        <a href="#" class="thumbnail">
+                            <img src="/media/{{ obj.avatar }}" alt="img-responsive" class="img-circle">
+                        </a>
+                    </div>
+                    <form method="post" novalidate class="col-xs-6 col-md-4">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label>{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
